@@ -91,7 +91,7 @@
       </li>
       <!-- Strat Logout admin -->
       <li class="nav-item ">
-        <a class="nav-link"  href="{{URL::to('/logout-admin')}}">
+        <a class="nav-link"  href="{{URL::to('/logout-authentication')}}">
             <i class="fas fa-power-off"></i>
         </a>
           
@@ -131,7 +131,7 @@
           <img src="{{URL::to('public/backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{URL::to('/profile')}}" class="d-block">{{Session::get('admin_name')}}</a>
+          <a href="{{URL::to('/profile')}}" class="d-block">{{Auth::user()->admin_name}}</a>
         </div>
       </div>
 
@@ -347,14 +347,16 @@
               </p>
             </a>
           </li>
+          @hasrole('admin')
           <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
+            <a href="{{URL::to('/users')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Quản Lý User
               </p>
             </a>
           </li>
+          @endhasrole
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -449,6 +451,18 @@
 <script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
 <script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
 <script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+<script>
+  $( document ).ready(function() {
+    $('input[type="checkbox"]').on('change', function() {
+      var checkedValue = $(this).prop('checked');
+        $(this).closest('tr').find('input[type="checkbox"]').each(function(){
+         $(this).prop('checked',false);
+       });
+        $(this).prop("checked",checkedValue);
+
+      });
+  });
+</script>
 
 <script>
   $(function () {

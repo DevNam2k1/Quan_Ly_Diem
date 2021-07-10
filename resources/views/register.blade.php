@@ -22,7 +22,7 @@
 
   <div class="card">
     <div class="card-body register-card-body">
-      <p class="login-box-msg">ĐĂNG KÍ TÀI KHOẢN</p>
+      <p class="login-box-msg">ĐĂNG KÍ TÀI KHOẢN AUTHENTICATION</p>
       @if(session()->has('message'))
       <div class="alert alert-success">
           {!! session()->get('message') !!}
@@ -115,8 +115,10 @@
           Sign up using Google+
         </a>
       </div> --}}
-
-      <a href="{{URL::to('/login')}}" class="text-center">Đăng Nhập</a>
+      
+      <p class="mb-1">
+        <a href="{{URL::to('/login-authentication')}}" class="text-center">Đăng nhập tài khoản Authencation</a>
+      </p>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

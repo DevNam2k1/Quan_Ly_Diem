@@ -58,11 +58,7 @@ class ClassController extends Controller
     } 
 
     public function edit_class($class_id){
-      $admin_id = Session::get('admin_id');
-      if(empty($admin_id)){
-      Session::put('message','Không có quyền truy cập!');
-      return Redirect::to('/login')->send();
-      }
+      
       $lecturers_list = DB::table('tbl_lecturers')->get();
       $major_list = DB::table('tbl_major')->get();
       $course_list = DB::table('tbl_course')->get();
@@ -93,11 +89,7 @@ class ClassController extends Controller
       return Redirect::to('/class-list');
   }
   public function delete_class($class_id){
-    $admin_id = Session::get('admin_id');
-    if(empty($admin_id)){
-     Session::put('message','Không có quyền truy cập!');
-     return Redirect::to('/login')->send();
-    }
+
 
     DB::table('tbl_class')->where('class_id',$class_id)->delete();
 

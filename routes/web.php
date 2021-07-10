@@ -13,11 +13,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 //Admin
 Route::get('/','AdminController@login');
 Route::get('/login','AdminController@login');
 Route::get('/dashboard', 'AdminController@dashboard');
 Route::get('/calendar', 'AdminController@calendar');
+//User
+Route::get('users',
+		[
+			'uses'=>'UserController@index',
+			// 'as'=> 'Users',
+			// 'middleware'=> 'roles',
+			// 'roles' => ['admin','author']
+		]);
+Route::get('add-users','UserController@add_users');
+Route::post('store-users','UserController@store_users');
+Route::post('assign-roles','UserController@assign_roles');
 //Login and logout admin
 Route::get('/logout-admin', 'AdminController@logout_admin');
 Route::post('/login-admin', 'AdminController@login_admin');
@@ -92,5 +104,9 @@ Route::post('/update-course/{course_id}','CourseController@update_course');
 
 //Authentication roles
 Route::get('/register', 'AuthController@register');
+Route::get('/login-authentication','AuthController@login_authentication');
+Route::get('/logout-authentication','AuthController@logout_authentication');
 
 Route::post('/register-authencation','AuthController@register_authencation');
+Route::post('/login','AuthController@login');
+

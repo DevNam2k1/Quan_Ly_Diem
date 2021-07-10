@@ -12,22 +12,14 @@ session_start();
 class SubjectController extends Controller
 {
     public function add_subject(){
-        $admin_id = Session::get('admin_id');
-        if(empty($admin_id)){
-            Session::put('message','Không có quyền truy cập!');
-        return Redirect::to('/login')->send();
-        }
+
         $lecturers_list = DB::table('tbl_lecturers')->get();
 
         return view('admin.add_subject')->with('lecturers_list',$lecturers_list);
     }
 
     public function save_subject(Request $request){
-        $admin_id = Session::get('admin_id');
-        if(empty($admin_id)){
-            Session::put('message','Không có quyền truy cập!');
-        return Redirect::to('/login')->send();
-        }
+
         $data = array();
         $data['subject_id'] = $request->subject_id;
         $data['subject_name'] = $request->subject_name;
@@ -41,10 +33,7 @@ class SubjectController extends Controller
         return Redirect::to('/subject-list');
     }
     public function subject_list(){
-        $admin_id = Session::get('admin_id');
-        if(empty($admin_id)){
-         return Redirect::to('/login')->send();
-        }
+
        $subject_list = DB::table('tbl_subject')
        ->join('tbl_lecturers','tbl_lecturers.lecturers_id','=','tbl_subject.lecturers_id')
        ->get();
@@ -52,10 +41,7 @@ class SubjectController extends Controller
        return view('admin.subject_list')->with('subject_list',$subject_list);
     }
     public function edit_subject($subject_id){
-        $admin_id = Session::get('admin_id');
-        if(empty($admin_id)){
-         return Redirect::to('/login')->send();
-        }
+
         $lecturers_list = DB::table('tbl_lecturers')->get();
         $edit_subject = DB::table('tbl_subject')->where('subject_id',$subject_id)->get();
  
@@ -63,11 +49,7 @@ class SubjectController extends Controller
         return view('admin.edit_subject')->with('edit_subject',$edit_subject)->with('lecturers_list',$lecturers_list);
     }
     public function update_subject(Request $request,$subject_id){
-        $admin_id = Session::get('admin_id');
-        if(empty($admin_id)){
-            Session::put('message','Không có quyền truy cập!');
-        return Redirect::to('/login')->send();
-        }
+
         $data = array();
         $data['subject_id'] = $request->subject_id;
         $data['subject_name'] = $request->subject_name;
@@ -83,11 +65,7 @@ class SubjectController extends Controller
 
     }
     public function delete_subject($subject_id){
-        $admin_id = Session::get('admin_id');
-        if(empty($admin_id)){
-            Session::put('message','Không có quyền truy cập!');
-            return Redirect::to('/login')->send();
-        }
+
         DB::table('tbl_subject')->where('subject_id',$subject_id)->delete();
 
         Session::put('message','Xóa môn học thành công');

@@ -7,12 +7,13 @@ use DB;
 use App\Http\Requests;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Auth;
 session_start();
 
 class AdminController extends Controller
 {
     public function AuthLogin(){
-        $admin_id = Session::get('admin_id');
+        $admin_id = Auth::id();
         if($admin_id){
             return Redirect::to('/dashboard');
         } else {
@@ -70,5 +71,9 @@ class AdminController extends Controller
          Session::put('admin_id',null);
          Session::put('subject_id',null);
          return Redirect::to('/login');
+    }
+
+    public function manager(){
+        return view('admin.users.user_list');
     }
 }
