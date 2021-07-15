@@ -28,6 +28,8 @@ Route::get('users',
 			// 'roles' => ['admin','author']
 		]);
 Route::get('add-users','UserController@add_users');
+Route::get('delete-users-roles/{admin_id}','UserController@delete_users_roles');
+
 Route::post('store-users','UserController@store_users');
 Route::post('assign-roles','UserController@assign_roles');
 //Login and logout admin

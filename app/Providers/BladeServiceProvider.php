@@ -28,7 +28,7 @@ class BladeServiceProvider extends ServiceProvider
     {
         Blade::if('hasrole', function ($expression) {
             if(Auth::user()){
-                if(Auth::user()->hasAnyRole($expression)){
+                if(Auth::user()->hasRole($expression)){
                     return true;
                 }
             }

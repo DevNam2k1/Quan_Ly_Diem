@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use App\Modles\Roles;
+use App\Models\Roles;
 use App\Models\Admin;
+use Auth;
 use Session;
 class UserController extends Controller
 {
@@ -24,20 +25,37 @@ class UserController extends Controller
     public function add_users(){
         return view('admin.users.add_users');
     }
+    public function delete_users_roles($admin_id){
+         if(Auth::id() == $admin_id){
+             return  redirect()->back()->with('error','Bạn khổng thể xóa quyền của chính mình');
+         }
+
+        $admin = Admin::find($admin_id);
+
+        if($admin){
+            $admin->roles()->detach();
+            $admin->delete();
+        }
+        return redirect()->back()->with('message','Xóa tài khoản thành công');
+    }
     public function assign_roles(Request $request){
+        
+        if(Auth::id() == $request->admin_id){
+            return  redirect()->back()->with('error','Bạn khổng thể phân quyền của chính mình');
+        }
         $data = $request->all();
-        $user = Admin::where('admin_email',$data['admin_email'])->first();
+        $user = Admin::where('admin_email',$request->admin_email)->first();
         $user->roles()->detach();
-        if($request['author_role']){
+        if($request->author_role){
            $user->roles()->attach(Roles::where('name','Author')->first());     
         }
-        if($request['user_role']){
+        if($request->user_role){
            $user->roles()->attach(Roles::where('name','User')->first());     
         }
-        if($request['admin_role']){
+        if($request->admin_role){
            $user->roles()->attach(Roles::where('name','Admin')->first());     
         }
-        return redirect()->back();
+        return redirect()->back()->with('message','Phân quyền thành công');
     }
     public function store_users(Request $request){
         $data = $request->all();

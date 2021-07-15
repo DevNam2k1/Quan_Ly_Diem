@@ -22,13 +22,15 @@
     <!-- /.card-header -->
     <div class="card-body">
       <table id="example1" class="table table-bordered table-striped" style="text-align: center">
-        <?php 
-        $message = Session::get('message');
-        if ($message) {
-          echo '<span class="text-alert" style="color:green">' .$message. '</span>';
-          Session::put('message',null);
-        }
-        ?>
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            {!! session()->get('message') !!}
+        </div>
+       @elseif(session()->has('error'))
+         <div class="alert alert-danger">
+            {!! session()->get('error') !!}
+        </div>
+         @endif
         <br>
         <thead>
           <tr>
@@ -43,19 +45,26 @@
         </thead>
         <tbody>
             @foreach($admin as $key => $user)
-            <form action="{{url('/assign-roles')}}" method="POST">
-              @csrf
-          <tr>
+
+            <tr>
+              <form action="{{URL::to('/assign-roles')}}" method="POST">
+                @csrf
             <td>{{ $user->admin_name }}</td>
-            <td>{{ $user->admin_email }} <input type="hidden" name="admin_email" value="{{ $user->admin_email }}"></td>
+            <td>{{ $user->admin_email }} 
+            <input type="hidden" name="admin_email" value="{{ $user->admin_email }}"></td>
+            <input type="hidden" name="admin_id" value="{{ $user->admin_id }}"></td>
             <td><input type="checkbox" name="admin_role"  {{$user->hasRole('Admin') ? 'checked' : ''}}></td>
             <td><input type="checkbox" name="author_role" {{$user->hasRole('Author') ? 'checked' : ''}}></td>
             <td><input type="checkbox" name="user_role"  {{$user->hasRole('User') ? 'checked' : ''}}></td>
+
             <td>
-              <input type="submit" value="Assign roles" class="btn btn-sm btn-default">
+              <input type="submit" value="Phân Quyền" class="btn btn-sm btn-success">
+              <br>
+              <a href="{{URL::to('delete-users-roles/'.$user->admin_id)}}" class="btn btn-sm btn-danger" style="margin-top: 10px">Xóa Tài Khoản</a>
            </td> 
+          </form>
           </tr>
-        </form>
+
           @endforeach
         </tbody>
       </table>
