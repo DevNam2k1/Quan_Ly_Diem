@@ -19,6 +19,11 @@ Route::get('/','AdminController@login');
 Route::get('/login','AdminController@login');
 Route::get('/dashboard', 'AdminController@dashboard');
 Route::get('/calendar', 'AdminController@calendar');
+Route::get('/profile', 'AdminController@profile');
+
+Route::post('/update-profile/{admin_id}', 'AdminController@update_profile');
+Route::post('/change-password/{admin_id}', 'AdminController@change_password');
+Route::post('/select-delivery','AdminController@select_delivery');
 //User
 Route::get('users',
 		[

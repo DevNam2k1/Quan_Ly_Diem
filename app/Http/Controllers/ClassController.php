@@ -12,11 +12,7 @@ session_start();
 class ClassController extends Controller
 {
     public function add_class(){
-      $admin_id = Session::get('admin_id');
-      if(empty($admin_id)){
-      Session::put('message','Không có quyền truy cập!');
-       return Redirect::to('/login')->send();
-      }
+
         $lecturers_list = DB::table('tbl_lecturers')->get();
         $major_list = DB::table('tbl_major')->get();
         $course_list = DB::table('tbl_course')->get();
@@ -24,11 +20,7 @@ class ClassController extends Controller
         return view('admin.add_class')->with('lecturers_list',$lecturers_list)->with('major_list',$major_list)->with('course_list',$course_list);
     }
     public function save_class(Request $request){
-      $admin_id = Session::get('admin_id');
-      if(empty($admin_id)){
-       Session::put('message','Không có quyền truy cập!');
-       $this-AuthLogin();
-      }
+  
         $data = array();
         $data['class_id'] = $request->class_id;
         $data['major_id'] = $request->major_id;
@@ -43,11 +35,7 @@ class ClassController extends Controller
         return Redirect::to('/class-list');
     }
     public function class_list(){
-      $admin_id = Session::get('admin_id');
-      if(empty($admin_id)){
-      Session::put('message','Không có quyền truy cập!');
-      return Redirect::to('/login')->send();
-      }
+  
       $class_list = DB::table('tbl_class')
       ->join('tbl_lecturers','tbl_lecturers.lecturers_id','=','tbl_class.lecturers_id')
       ->join('tbl_major','tbl_major.major_id','=','tbl_class.major_id')
@@ -69,11 +57,7 @@ class ClassController extends Controller
       return view('admin_layout')->with('admin.edit_class',$manager_class);
     }
     public function update_class(Request $request,$class_id){
-      $admin_id = Session::get('admin_id');
-      if(empty($admin_id)){
-       Session::put('message','Không có quyền truy cập!');
-       return Redirect::to('/login')->send();
-      } 
+ 
       $data = array();
       $data['class_id'] = $request->class_id;
       $data['major_id'] = $request->major_id;

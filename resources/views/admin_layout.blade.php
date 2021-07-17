@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Quản Lý Sinh Viên | Bảng Điều Khiển</title>
-
+  
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="{{asset('public/backend/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
    {{-- Zalo --}}
   <div class="zalo-chat-widget" data-oaid="579745863508352884" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="350" data-height="420"></div>
-
+    
 <script src="https://sp.zalo.me/plugins/sdk.js"></script>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -134,7 +134,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{URL::to('public/backend/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{URL::to('public/backend/dist/img/thanh.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="{{URL::to('/profile')}}" class="d-block">{{Auth::user()->admin_name}}</a>
@@ -470,6 +470,88 @@
   });
 </script>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+
+      // fetch_delivery();
+
+      // function fetch_delivery(){
+      //     var _token = $('input[name="_token"]').val();
+      //      $.ajax({
+      //         url : '{{url('/select-feeship')}}',
+      //         method: 'POST',
+      //         data:{_token:_token},
+      //         success:function(data){
+      //            $('#load_delivery').html(data);
+      //         }
+      //     });
+      // }
+      // $(document).on('blur','.fee_feeship_edit',function(){
+
+      //     var feeship_id = $(this).data('feeship_id');
+      //     var fee_value = $(this).text();
+      //      var _token = $('input[name="_token"]').val();
+      //     // alert(feeship_id);
+      //     // alert(fee_value);
+      //     $.ajax({
+      //         url : '{{url('/update-delivery')}}',
+      //         method: 'POST',
+      //         data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
+      //         success:function(data){
+      //            fetch_delivery();
+      //         }
+      //     });
+
+      // });
+      // $('.add_delivery').click(function(){
+
+      //    var city = $('.city').val();
+      //    var province = $('.province').val();
+      //    var wards = $('.wards').val();
+      //    var fee_ship = $('.fee_ship').val();
+      //     var _token = $('input[name="_token"]').val();
+      //    // alert(city);
+      //    // alert(province);
+      //    // alert(wards);
+      //    // alert(fee_ship);
+      //     $.ajax({
+      //         url : '{{url('/insert-delivery')}}',
+      //         method: 'POST',
+      //         data:{city:city, province:province, _token:_token, wards:wards, fee_ship:fee_ship},
+      //         success:function(data){
+      //            fetch_delivery();
+      //         }
+      //     });
+
+
+      // });
+      $('.choose').on('change',function(){
+          var action = $(this).attr('id');
+          var ma_id = $(this).val();
+          var _token = $('input[name="_token"]').val();
+          var result = '';
+          // alert(action);
+          //  alert(ma_id);
+          //   alert(_token);
+
+          if(action=='city'){
+              result = 'province';
+          }else{
+              result = 'wards';
+          }
+          $.ajax({
+              url : '{{url('/select-delivery')}}',
+              method: 'POST',
+              data:{action:action,ma_id:ma_id,_token:_token},
+              success:function(data){
+                 $('#'+result).html(data);     
+              }
+          });
+      }); 
+  })
+
+
+</script>
 <script>
   $(function () {
     $("#example1").DataTable({
