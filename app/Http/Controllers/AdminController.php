@@ -103,15 +103,30 @@ class AdminController extends Controller
         //  echo $province;
         
         //  exit;
+        if(empty($ward)){
+           $ward = 'Chưa xác định';
+           $city = 'Chưa xác định';
+           $province = 'Chưa xác định';
+        }
          $address = $data['address'] . ', ' .$ward . ', ' . $province . ', ' . $city;
-         $admin =  Admin::find($admin_id);
-         $admin->admin_name = $data['admin_name'];
-         $admin->admin_address = $address;
-         $admin->admin_experience = $data['admin_experience'];
-         $admin->admin_skill = $data['admin_skill'];
-         $admin->save();
-
-         return redirect()->back()->with('message','Cập nhật thành công');
+         $get_image = $request->file('image');
+      
+         if($get_image){
+             $get_name_image = $get_image->getClientOriginalName();
+             $name_image = current(explode('.',$get_name_image));
+             $new_image =  $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+             $get_image->move('public/backend/dist/img',$new_image);
+             $data['image'] = $new_image;
+             $admin =  Admin::find($admin_id);
+             $admin->admin_name = $data['admin_name'];
+             $admin->admin_address = $address;
+             $admin->admin_experience = $data['admin_experience'];
+             $admin->admin_skill = $data['admin_skill'];
+             $admin->image = $data['image'];
+             $admin->save();
+             return redirect()->back()->with('message','Cập nhật thành công');
+         }
+         
     }
     public function login_admin(Request $request){
         $admin_email = $request->admin_email;

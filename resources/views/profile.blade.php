@@ -182,7 +182,7 @@
                         {!! session()->get('error') !!}
                     </div>
                      @endif
-                    <form class="form-horizontal" action="{{URL::to('update-profile/'.Auth::user()->admin_id)}}" method="post">
+                    <form class="form-horizontal" action="{{URL::to('update-profile/'.Auth::user()->admin_id)}}" method="post" enctype="multipart/form-data">
                       @csrf
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Họ và Tên</label>
@@ -190,7 +190,18 @@
                           <input type="text" name="admin_name" value="{{Auth::user()->admin_name}}" class="form-control" id="inputName" placeholder="Name">
                         </div>
                       </div>
-                      
+                    <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="exampleInputFile">Ảnh Đại Diện</label>
+                    <div class="input-group col-sm-10">
+                      <div class="custom-file">
+                        <input type="file" name="image" class="custom-file-input " id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
+                      </div>
+                      <div class="input-group-append">
+                        <span class="input-group-text">Upload</span>
+                      </div>
+                    </div>
+                  </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">

@@ -444,6 +444,7 @@
 <script src="{{asset('public/backend/dist/js/pages/dashboard.js')}}"></script>
 {{-- JQuery Validation Form --}}
 <script src="{{asset('public/backend/dist/js/formValidation.js')}}"></script>
+<script src="{{asset('public/backend/dist/js/ckeditor/ckeditor.js')}}"></script>
 <!-- DataTables  & Plugins -->
 <script src="{{asset('public/backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('public/backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
@@ -470,6 +471,15 @@
   });
 </script>
 
+ <script>
+       // Replace the <textarea id="editor1"> with a CKEditor
+       // instance, using default configuration.
+        // CKEDITOR.replace('exampleInputFile');
+        // CKEDITOR.replace('ckeditor1');
+        CKEDITOR.replace('ckeditor2');
+        CKEDITOR.replace('ckeditor3');
+        CKEDITOR.replace('id4');
+</script>
 <script type="text/javascript">
   $(document).ready(function(){
 
