@@ -44,6 +44,19 @@ class PointController extends Controller
         Session::put('subject_id',null);
         Session::put('class_id',null);
 
+        //Tính điểm trung bình của sinh viên
+        // $subject = DB::table('tbl_subject')->get();
+        // $total_subject = $subject->count();
+        
+        // $student = DB::table('tbl_point')->where('student_id',$request->student_id)->get();
+        // $sum1 = $student->avg('skill_1st');
+        // $sum2 = $student->avg('final_1st');
+        // $avg_student = Collection::make([$sum1,$sum2])->avg();
+        // $data2 = array();
+        // $data2['student_id'] = $request->student_id;
+        // $data2['avg_point'] = $avg_student;
+        // DB::table('tbl_avgpoint')->insert($data2);
+        //$student->avg('skill_1st','skill_2st','final_1st','final_2st')
         return Redirect::to('/add-point');
     }
     public function score_list(){

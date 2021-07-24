@@ -38,6 +38,7 @@
             @foreach ($subject_list as $key => $subject)
                 <th>{{$subject->subject_name}}</th>
             @endforeach
+            <th>Điểm TB</th>
           </tr>
         </thead>
         <tbody>
@@ -84,6 +85,23 @@
                   @endif
                
             @endforeach
+            <td>
+              @php
+                  
+                  $student = DB::table('tbl_point')->where('student_id',$student->student_id)->get();
+            // foreach($student as $key => $point) {
+    
+            //         $score =  $point->skill_1st;
+                    
+            // }   
+       
+                 $sum1 = $student->avg('skill_1st');
+                 $sum2 = $student->avg('final_1st');
+                 $avg_student = ($sum1 + $sum2)/2;
+                 echo $avg_student;
+        //$student->avg('skill_1st','skill_2st','final_1st','final_2st')
+              @endphp
+            </td>
           </tr>
           @endforeach
         </tbody>

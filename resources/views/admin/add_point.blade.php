@@ -69,7 +69,9 @@
       <select class="form-control select2" name="student_id" style="width: 100%;">
           <option selected="selected">--Chọn Sinh Viên--</option>
           @foreach ($class_list as $key => $class)
-             <option value="{{$class->student_id}}">{{$class->lastname}} {{$class->firstname}}</option>
+             @if ($class->class_id == Session::get('class_id'))
+               <option value="{{$class->student_id}}">{{$class->lastname}} {{$class->firstname}}</option> 
+             @endif
           @endforeach
           
       </select>

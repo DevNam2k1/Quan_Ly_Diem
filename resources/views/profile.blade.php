@@ -25,7 +25,7 @@
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{URL::to('public/backend/dist/img/thanh.jpg')}}"
+                       src="{{URL::to('public/backend/dist/img/'.Auth::user()->image)}}"
                        alt="User profile picture">
                        
                 </div>

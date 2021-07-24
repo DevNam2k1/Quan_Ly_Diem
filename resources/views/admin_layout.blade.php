@@ -134,7 +134,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{URL::to('public/backend/dist/img/thanh.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{URL::to('public/backend/dist/img/'.Auth::user()->image)}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="{{URL::to('/profile')}}" class="d-block">{{Auth::user()->admin_name}}</a>

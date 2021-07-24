@@ -103,12 +103,9 @@ class AdminController extends Controller
         //  echo $province;
         
         //  exit;
-        if(empty($ward)){
-           $ward = 'Chưa xác định';
-           $city = 'Chưa xác định';
-           $province = 'Chưa xác định';
+        if($ward){
+            $address = $data['address'] . ', ' .$ward . ', ' . $province . ', ' . $city;
         }
-         $address = $data['address'] . ', ' .$ward . ', ' . $province . ', ' . $city;
          $get_image = $request->file('image');
       
          if($get_image){

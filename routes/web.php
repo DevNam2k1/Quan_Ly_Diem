@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+//Test Average
+Route::get('/avg-point','AverageController@average_point');
 //Admin
 Route::get('/','AdminController@login');
 Route::get('/login','AdminController@login');
