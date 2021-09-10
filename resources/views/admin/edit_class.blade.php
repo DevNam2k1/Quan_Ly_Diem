@@ -28,7 +28,16 @@
       <div class="card-body">         
         <div class="form-group">
           <label for="exampleInputEmail1">Mã Lớp Học</label>
-          <input type="text" class="form-control" value="{{$manager->class_id}}" name="class_id" id="exampleInputEmail1" placeholder="Mã Ngành Học">
+          <input type="text" class="form-control @if($errors->has('class_id'))is-invalid @endif" value="{{$manager->class_id}}" name="class_id" id="exampleInputEmail1" placeholder="Mã Ngành Học"
+          @if($errors->has('class_id'))     
+          aria-invalid="true"
+          @endif
+          >
+          @if($errors->has('class_id'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('class_id')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
             <label>Ngành Học</label>
@@ -44,7 +53,16 @@
           </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Tên Lớp Học</label>
-          <input type="text" class="form-control" value="{{$manager->class_name}}" name="class_name" id="exampleInputPassword1" placeholder="Tên Lớp Học">
+          <input type="text" class="form-control @if($errors->has('class_name'))is-invalid @endif" value="{{$manager->class_name}}" name="class_name" id="exampleInputPassword1" placeholder="Tên Lớp Học"
+          @if($errors->has('class_name'))     
+          aria-invalid="true"
+          @endif
+          >
+          @if($errors->has('class_name'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('class_name')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
             <label>Giáo Viên Chủ Nhiệm</label>
@@ -72,15 +90,42 @@
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Số Lượng Sinh Viên</label>
-            <input type="text" class="form-control" value="{{$manager->student_qty}}" name="student_qty" id="exampleInputPassword1" placeholder="Số Lượng Sinh Viên">
+            <input type="text" class="form-control @if($errors->has('student_qty'))is-invalid @endif" value="{{$manager->student_qty}}" name="student_qty" id="exampleInputPassword1" placeholder="Số Lượng Sinh Viên"
+            @if($errors->has('student_qty'))     
+              aria-invalid="true"
+            @endif
+            >
+            @if($errors->has('student_qty'))
+            <span  class="error invalid-feedback" >
+                {{$errors->first('student_qty')}}
+            </span> 
+            @endif
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Thời Gian Bắt Đầu</label>
-            <input type="date" class="form-control" value="{{$manager->start_time}}" name="start_time" id="exampleInputPassword1" placeholder="Thời Gian Bắt Đầu">
+            <input type="date" class="form-control @if($errors->has('start_time'))is-invalid @endif" value="{{$manager->start_time}}" name="start_time" id="exampleInputPassword1" placeholder="Thời Gian Bắt Đầu"
+            @if($errors->has('start_time'))     
+            aria-invalid="true"
+            @endif
+            >
+            @if($errors->has('start_time'))
+            <span  class="error invalid-feedback" >
+                {{$errors->first('start_time')}}
+            </span> 
+            @endif
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Thời Gian Kết Thúc</label>
-            <input type="date" class="form-control" value="{{$manager->end_time}}" name="end_time" id="exampleInputPassword1" placeholder="Thời Gian Kết Thúc">
+            <input type="date" class="form-control @if($errors->has('end_time'))is-invalid @endif" value="{{$manager->end_time}}" name="end_time" id="exampleInputPassword1" placeholder="Thời Gian Kết Thúc"
+            @if($errors->has('end_time'))     
+              aria-invalid="true"
+            @endif
+            >
+            @if($errors->has('end_time'))
+            <span  class="error invalid-feedback" >
+                {{$errors->first('end_time')}}
+            </span> 
+            @endif
           </div>
         </div>
       <!-- /.card-body -->

@@ -22,7 +22,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">ĐĂNG NHẬP TÀI KHOẢN </p>
+      <p class="login-box-msg">ĐĂNG NHẬP TÀI KHOẢN SINH VIÊN </p>
       <?php 
       $message = Session::get('message');
       if ($message) {
@@ -31,13 +31,13 @@
       }
      ?>
   
-      <form action="{{URL::to('/login-admin')}}" method="post">
+      <form action="{{URL::to('/login-student')}}" method="post">
         {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="admin_email" placeholder="Email">
+          <input type="text" class="form-control" name="student_id" placeholder="Mã Sinh Viên">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-envelope">
+              <span class="fas fa-user"></span>
               </span>
             </div>
           </div>
@@ -93,9 +93,9 @@
       <p class="mb-1">
         <a href="{{URL::to('/forgot-password')}}">Quên mật khẩu</a>
       </p>
-      <p class="mb-0">
+{{-- <p class="mb-0">
         <a href="{{URL::to('/register')}}" class="text-center">Đăng kí tài khoản</a>
-      </p>
+      </p>       --}}
       <p class="mb-0">
         <a href="{{URL::to('/login-authentication')}}" class="text-center">Đăng nhập tài khoản Authencation</a>
       </p>

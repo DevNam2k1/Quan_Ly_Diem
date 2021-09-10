@@ -40,7 +40,9 @@
             <th width='50'>Điểm Final</th>
             <th width='50'>Điểm Thi Lại Skill</th>
             <th width='50'>Điểm Thi Lại Final</th>
+            @hasrole('admin','author')
             <th  width='100'></th>
+            @endhasrole
           </tr>
         </thead>
         <tbody>
@@ -54,27 +56,28 @@
             @if ($score->skill_1st != null)
             <td>{{$score->skill_1st}}</td>
             @else
-               <td><span class="badge bg-danger">X</span></td> 
+               <td><span class="badge bg-danger">-</span></td> 
             @endif
 
 
             @if ($score->final_1st != null)
               <td>{{$score->final_1st}}</td>
             @else
-              <td><span class="badge bg-danger">X</span></td> 
+              <td><span class="badge bg-danger">-</span></td> 
             @endif
             
             @if ($score->skill_2st != null)
               <td>{{$score->skill_2st}}</td>
             @else
-              <td><span class="badge bg-danger">X</span></td> 
+              <td><span class="badge bg-danger">-</span></td> 
             @endif
             
             @if ($score->final_2st != null)
               <td>{{$score->final_2st}}</td>
             @else
-            <td><span class="badge bg-danger">X</span></td> 
+            <td><span class="badge bg-danger">-</span></td> 
             @endif
+            @hasrole('admin','author')
             <td>
               <a href="{{URL::to('/edit-score/'.$score->student_id.'/'.$score->subject_id)}}" class="active styling-edit " ui-toggle-class="" style="margin-left: 5px; font-size:20px; ">
                 <i class="far fa-edit text-success" ></i>
@@ -84,6 +87,7 @@
                 <i class="fa fa-times text-danger "></i></a>
               </a>
             </td>
+            @endhasrole
           </tr>
                         
           @endforeach

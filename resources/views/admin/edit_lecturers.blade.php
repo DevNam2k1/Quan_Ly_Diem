@@ -31,11 +31,29 @@
       <div class="card-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Mã Giảng Viên</label>
-          <input type="text" class="form-control" value="{{$teacher->lecturers_id}}" name="lecturers_id" id="exampleInputEmail1" placeholder="Mã Giảng Viên">
+          <input type="text" class="form-control @if($errors->has('lecturers_id'))is-invalid @endif" value="{{$teacher->lecturers_id}}" name="lecturers_id" id="exampleInputEmail1" placeholder="Mã Giảng Viên"
+          @if($errors->has('lecturers_id'))     
+          aria-invalid="true"
+          @endif
+          >
+          @if($errors->has('lecturers_id'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('lecturers_id')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Họ Và Tên </label>
-          <input type="text" class="form-control" value="{{$teacher->lecturers_name}}" name="lecturers_name" id="exampleInputPassword1" placeholder="Họ và Tên">
+          <input type="text" class="form-control @if($errors->has('lecturers_name'))is-invalid @endif" value="{{$teacher->lecturers_name}}" name="lecturers_name" id="exampleInputPassword1" placeholder="Họ và Tên"
+          @if($errors->has('lecturers_id'))     
+          aria-invalid="true"
+          @endif
+          >
+          @if($errors->has('lecturers_name'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('lecturers_name')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Giới Tính</label>
@@ -53,7 +71,11 @@
 
                 id="radioPrimary3" name="gender" >  Nữ
             <input type="radio" style="margin-left:200px;" value="2" id="radioPrimary3" name="gender" >  Khác
-            
+            @if($errors->has('gender'))
+            <span  class="error invalid-feedback" >
+                {{$errors->first('gender')}}
+            </span> 
+            @endif
         </div>
       <!-- /.card-body -->
       <div class="card-footer">

@@ -160,26 +160,14 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          @hasrole(['admin','author'])
           <li class="nav-item menu-open">
-            <a href="{{URL::to('/dashboard')}}" class="nav-link active">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Bản Điều Khiển
               </p>
             </a>
           </li>
-          @endhasrole
-          @hasrole('user')
-          <li class="nav-item menu-open">
-            <a href="{{URL::to('/my-point')}}" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Bảng Điểm Cá Nhân
-              </p>
-            </a>
-          </li>
-          @endhasrole
           {{-- Quản Lý Điểm --}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -202,14 +190,12 @@
                   <p>Bảng Điểm Theo Lớp</p>
                 </a>
               </li>
-              @hasrole(['admin','author'])
               <li class="nav-item">
                 <a href="{{URL::to('/add-point')}}" class="nav-link">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p> Nhập Điểm </p>
                 </a>
               </li>
-              @endhasrole
             </ul>
           </li>
           {{--Quản lý sinh viên--}}
@@ -228,18 +214,14 @@
                   <p> Danh Sách</p>
                 </a>
               </li>
-              @hasrole(['admin','author'])
               <li class="nav-item">
                 <a href="{{URL::to('/add-student')}}" class="nav-link">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Sinh Viên</p>
                 </a>
               </li>
-              @endhasrole
             </ul>
           </li>
-          
-          @hasrole(['admin','author'])
           {{--Quản lý Giảng Viên--}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -264,8 +246,6 @@
               </li>
             </ul>
           </li>
-          @endhasrole
-          @hasrole(['admin','author'])
           {{--Quản Lý Môn Học--}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -290,8 +270,6 @@
               </li>
             </ul>
           </li>
-          @endhasrole
-          @hasrole(['admin','author'])
           {{--Quản Lý Lớp Học--}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -316,9 +294,7 @@
               </li>
             </ul>
           </li>
-          @endhasrole
           {{--Quản Lý Ngành Học--}}
-          @hasrole(['admin','author'])
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-laptop nav-icon"></i>
@@ -342,8 +318,6 @@
               </li>
             </ul>
           </li>
-          @endhasrole
-          @hasrole(['admin','author'])
           {{--Quản Lý Khóa--}}
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -368,7 +342,6 @@
               </li>
             </ul>
           </li>
-          @endhasrole
           {{--Lịch Học--}}
           <li class="nav-item">
             <a href="{{URL::to('/calendar')}}" class="nav-link">
@@ -381,33 +354,12 @@
           </li>
           @hasrole('admin')
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{URL::to('/users')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Quản Lý User
-                <i class="right fas fa-angle-left "></i>
               </p>
             </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{URL::to('/users')}}" class="nav-link">
-                  <i class="fas fa-list nav-icon"></i>
-                  <p>Danh Sách</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{URL::to('/register-lecturers')}}" class="nav-link">
-                  <i class="fas fa-plus-square nav-icon"></i>
-                  <p>Thêm TK Giáo Vụ</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{URL::to('/register-student')}}" class="nav-link">
-                  <i class="fas fa-plus-square nav-icon"></i>
-                  <p>Thêm TK Sinh Viên</p>
-                </a>
-              </li>
-            </ul>
           </li>
           @endhasrole
         </ul>
@@ -495,19 +447,7 @@
 <!-- jquery-validation -->
 <script src="{{asset('public/backend/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
 <script src="{{asset('public/backend/plugins/jquery-validation/additional-methods.min.js')}}"></script>
-<!-- DataTables  & Plugins -->
-<script src="{{asset('public/backend/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/jszip/jszip.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
-<script src="{{asset('public/backend/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+
 <script src="{{asset('public/backend/plugins/flot/jquery.flot.js')}}"></script>
 <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
 <script src="{{asset('public/backend/plugins/flot/plugins/jquery.flot.resize.js')}}"></script>
@@ -803,300 +743,6 @@
         + Math.round(series.percent) + '%</div>'
     }
   </script>
-
-<script>
-  $(function () {
-    $.validator.setDefaults({
-      submitHandler: function () {
-        alert( "Form successful submitted!" );
-      }
-    });
-    $('#quickForm').validate({
-      rules: {
-        lecturers_id: {
-          required: true,
-        },
-        lecturers_name: {
-          required: true,
-          minlength: 20
-        },
-        terms: {
-          required: true
-        },
-      },
-      messages: {
-        lecturers_id: {
-          required: "Please enter a email address",
-          email: "Please enter a vaild email address"
-        },
-        lecturers_name: {
-          required: "Please provide a password",
-          minlength: "Your password must be at least 20 characters long"
-        },
-        terms: "Please accept our terms"
-      },
-      errorElement: 'span',
-      errorPlacement: function (error, element) {
-        error.addClass('invalid-feedback');
-        element.closest('.form-group').append(error);
-      },
-      highlight: function (element, errorClass, validClass) {
-        $(element).addClass('is-invalid');
-      },
-      unhighlight: function (element, errorClass, validClass) {
-        $(element).removeClass('is-invalid');
-      }
-    });
-  });
-  </script>
-  
-<script>
-  $( document ).ready(function() {
-    $('input[type="checkbox"]').on('change', function() {
-      var checkedValue = $(this).prop('checked');
-        $(this).closest('tr').find('input[type="checkbox"]').each(function(){
-         $(this).prop('checked',false);
-       });
-        $(this).prop("checked",checkedValue);
-
-      });
-  });
-</script>
-<script type="text/javascript">
-  $(document).ready(function(){
-
-      // fetch_delivery();
-
-      // function fetch_delivery(){
-      //     var _token = $('input[name="_token"]').val();
-      //      $.ajax({
-      //         url : '{{url('/select-feeship')}}',
-      //         method: 'POST',
-      //         data:{_token:_token},
-      //         success:function(data){
-      //            $('#load_delivery').html(data);
-      //         }
-      //     });
-      // }
-      // $(document).on('blur','.fee_feeship_edit',function(){
-
-      //     var feeship_id = $(this).data('feeship_id');
-      //     var fee_value = $(this).text();
-      //      var _token = $('input[name="_token"]').val();
-      //     // alert(feeship_id);
-      //     // alert(fee_value);
-      //     $.ajax({
-      //         url : '{{url('/update-delivery')}}',
-      //         method: 'POST',
-      //         data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
-      //         success:function(data){
-      //            fetch_delivery();
-      //         }
-      //     });
-
-      // });
-      // $('.add_delivery').click(function(){
-
-      //    var city = $('.city').val();
-      //    var province = $('.province').val();
-      //    var wards = $('.wards').val();
-      //    var fee_ship = $('.fee_ship').val();
-      //     var _token = $('input[name="_token"]').val();
-      //    // alert(city);
-      //    // alert(province);
-      //    // alert(wards);
-      //    // alert(fee_ship);
-      //     $.ajax({
-      //         url : '{{url('/insert-delivery')}}',
-      //         method: 'POST',
-      //         data:{city:city, province:province, _token:_token, wards:wards, fee_ship:fee_ship},
-      //         success:function(data){
-      //            fetch_delivery();
-      //         }
-      //     });
-
-
-      // });
-      $('.choose4').on('change',function(){
-          var action = $(this).attr('id');
-          var ma_id = $(this).val();
-          var _token = $('input[name="_token"]').val();
-          var result = '';
-          // alert(action);
-          //  alert(ma_id);
-          //   alert(_token);
-            
-
-          if(action =='class_name'){
-              result = 'subject_name';
-          } else {
-             result = 'table2';
-          }
-          $.ajax({
-              url : '{{url('/select-class-name')}}',
-              method: 'POST',
-              data:{action:action,ma_id:ma_id,_token:_token},
-              success:function(data){
-                 $('#'+result).html(data);     
-              }
-          });
-      }); 
-      $('.choose3').on('change',function(){
-          var action = $(this).attr('id');
-          var ma_id = $(this).val();
-          var _token = $('input[name="_token"]').val();
-          var result = '';
-          // alert(action);
-          //  alert(ma_id);
-          //   alert(_token);
-          //   exit();
-
-          if(action=='student_name'){
-              result = 'table1';
-          }
-          $.ajax({
-              url : '{{url('/select-student-name')}}',
-              method: 'POST',
-              data:{action:action,ma_id:ma_id,_token:_token},
-              success:function(data){
-                 $('#'+result).html(data);     
-              }
-          });
-      }); 
-
-      $('.choose2').on('change',function(){
-          var action = $(this).attr('id');
-          var ma_id = $(this).val();
-          var _token = $('input[name="_token"]').val();
-          var result = '';
-          // alert(action);
-          //  alert(ma_id);
-          //   alert(_token);
-
-          if(action=='student_id'){
-              result = 'student_name';
-          }
-          $.ajax({
-              url : '{{url('/select-student-id')}}',
-              method: 'POST',
-              data:{action:action,ma_id:ma_id,_token:_token},
-              success:function(data){
-                 $('#'+result).html(data);     
-              }
-          });
-      }); 
-
-      $('.choose').on('change',function(){
-          var action = $(this).attr('id');
-          var ma_id = $(this).val();
-          var _token = $('input[name="_token"]').val();
-          var result = '';
-          // alert(action);
-          //  alert(ma_id);
-          //   alert(_token);
-
-          if(action=='city'){
-              result = 'province';
-          }else{
-              result = 'wards';
-          }
-          $.ajax({
-              url : '{{url('/select-delivery')}}',
-              method: 'POST',
-              data:{action:action,ma_id:ma_id,_token:_token},
-              success:function(data){
-                 $('#'+result).html(data);     
-              }
-          });
-      }); 
-  })
-
-
-</script>
-<script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
-</script>
-
-<script type="text/javascript">
-  $.validate({
-
-  });
-
-</script>
-<script>
-$('#reservationtime').daterangepicker({
-  timePicker: true,
-  timePickerIncrement: 30,
-  locale: {
-    format: 'DD/MM/YYYY hh:mm A'
-  }
-})
-$('#reservationdate').datetimepicker({
-        format: 'L'
-    });
-
-  var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [
-          'Chrome',
-          'IE',
-          'FireFox',
-          'Safari',
-          'Opera',
-          'Navigator',
-      ],
-      datasets: [
-        {
-          data: [700,500,400,600,300,100],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
-        }
-      ]
-    }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions
-    })
-
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = donutData;
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: pieData,
-      options: pieOptions
-    })
-
-</script>
 
 
 </body>

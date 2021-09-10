@@ -87,7 +87,7 @@ class MailController extends Controller
                 $admin->admin_password = $password;
                 $admin->save();
 
-                return redirect('login')->with('message','Đổi mật khẩu thành công , hãy đăng nhập');
+                return redirect('login-authentication')->with('message','Đổi mật khẩu thành công , hãy đăng nhập');
               }
         
     }

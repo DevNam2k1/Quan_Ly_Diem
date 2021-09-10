@@ -33,10 +33,10 @@
       </div>
         @endif
   
-      <form action="{{URL::to('/login')}}" method="post">
+      <form action="{{URL::to('/login')}}" method="post" id="quickForm" >
         {{ csrf_field() }}
         <div class="input-group mb-3">
-          <input type="email" class="form-control" name="admin_email" placeholder="Email">
+          <input type="email" class="form-control" name="admin_email" placeholder="Email" id="exampleInputEmail1">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope">
@@ -44,13 +44,13 @@
             </div>
           </div>
         </div>
-        @if($errors->has('admin_email'))
+        {{-- @if($errors->has('admin_email'))
         <div class="alert alert-danger">
             {{$errors->first('admin_email')}}
          </div>
-        @endif
+        @endif --}}
         <div class="input-group mb-3">
-          <input type="password" class="form-control" name="admin_password" placeholder="Password">
+          <input type="password" class="form-control" name="admin_password" placeholder="Password" id="exampleInputPassword1">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock">
@@ -58,11 +58,11 @@
             </div>
           </div>
         </div>
-        @if($errors->has('admin_password'))
+        {{-- @if($errors->has('admin_password'))
         <div class="alert alert-danger">
             {{$errors->first('admin_password')}}
          </div>
-        @endif
+        @endif --}}
         <div class="row">
           <div class="col-6">
             <div class="icheck-primary">
@@ -96,7 +96,7 @@
         <a href="{{URL::to('/forgot-password')}}">Quên mật khẩu</a>
       </p>
       <p class="mb-1">
-        <a href="{{URL::to('/register')}}" class="text-center">Đăng kí tài khoản Authencation</a>
+        <a href="{{URL::to('/login-student')}}" class="text-center">Đăng nhập tài khoản Sinh Viên</a>
       </p>
       <p class="mb-1">
         <a href="{{URL::to('/login-authentication')}}" class="text-center">Đăng nhập tài khoản Authencation</a>
@@ -111,7 +111,56 @@
 <script src="{{asset('public/backend/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('public/backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- jquery-validation -->
+<script src="{{asset('public/backend/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('public/backend/plugins/jquery-validation/additional-methods.min.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('public/backend/dist/js/adminlte.min.js')}}"></script>
+<script>
+  $(function () {
+    $.validator.setDefaults({
+      submitHandler: function () {
+        alert( "Form successful submitted!" );
+      }
+    });
+    $('#quickForm').validate({
+      rules: {
+        admin_email: {
+          required: true,
+          email: true,
+        },
+        admin_password: {
+          required: true,
+          minlength: 8
+        },
+        terms: {
+          required: true
+        },
+      },
+      messages: {
+        admin_email: {
+          required: "Please enter a email address",
+          email: "Please enter a vaild email address"
+        },
+        admin_password: {
+          required: "Please provide a password",
+          minlength: "Your password must be at least 8 characters long"
+        },
+        terms: "Please accept our terms"
+      },
+      errorElement: 'span',
+      errorPlacement: function (error, element) {
+        error.addClass('invalid-feedback');
+        element.closest('.form-group').append(error);
+      },
+      highlight: function (element, errorClass, validClass) {
+        $(element).addClass('is-invalid');
+      },
+      unhighlight: function (element, errorClass, validClass) {
+        $(element).removeClass('is-invalid');
+      }
+    });
+  });
+  </script>
 </body>
 </html>

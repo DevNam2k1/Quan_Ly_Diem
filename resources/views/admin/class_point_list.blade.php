@@ -32,13 +32,22 @@
         <br>
         <thead>
           <tr>
-            <th>Mã SV</th>
-            <th>Họ Và Tên</th>
-            <th>Lớp</th>
+            <th rowspan="2">Mã SV</th>
+            <th rowspan="2">Họ Và Tên</th>
+            <th rowspan="2">Lớp</th>
             @foreach ($subject_list as $key => $subject)
-                <th>{{$subject->subject_name}}</th>
+                <th colspan="2" aria-controls="example1"  aria-label="{{$subject->subject_name}}: activate to sort column descending" aria-sort="ascending">{{$subject->subject_name}}
+                </th>
             @endforeach
-            <th>Điểm TB</th>
+            <th rowspan="2">Điểm TB</th>
+          </tr>
+          <tr>
+           
+            @foreach ($subject_list as $key => $subject)
+             <td>Điểm Skill</td>
+             <td>Điểm Final</td>
+           @endforeach
+          
           </tr>
         </thead>
         <tbody>
@@ -50,38 +59,39 @@
             <td>
                {{$student->class_name}}-{{$student->course_id}}
             </td>
+
             @foreach ($score_list as $key => $subject)
                 
                   @if ($subject->student_id == $student->student_id)
-                  <td>
+                  
                       @if ($subject->skill_1st >= 5 )
                            @if ($subject->skill_1st == null)
-                            <span class="badge bg-success" style="font-size: 12px">Điểm Skill : {{('X')}}</span>       
+                            <td>{{('X')}}</td>       
                             @else
-                              <span class="badge bg-success" style="font-size: 12px">Điểm Skill : {{$subject->skill_1st}} </span>       
+                              <td> {{$subject->skill_1st}} </td>       
                             @endif
                       @else
                               @if ($subject->skill_2st == null)
-                                <span class="badge bg-success" style="font-size: 12px">Điểm Skill : {{('X')}}</span>       
+                                <td> {{('X')}}</td>       
                               @else
-                               <span class="badge bg-success" style="font-size: 12px">Điểm Skill : {{$subject->skill_2st}} </span><       
+                               <td>{{$subject->skill_2st}} </td>       
                                @endif
                       @endif
                       @if ($subject->final_1st >= 5 )
                        
                       @if ($subject->final_1st == null)
-                             <span class="badge bg-success" style="font-size: 12px">Điểm Final : {{('X')}}</span>       
+                             <td> {{('X')}}</td>       
                             @else
-                           <span class="badge bg-success" style="font-size: 12px"> Điểm Final : {{$subject->final_1st}}</span>       
+                           <td>  {{$subject->final_1st}}</td>       
                             @endif
                       @else
                       @if ($subject->final_2st == null)
-                           <span class="badge bg-success" style="font-size: 12px"> Điểm Final : {{('X')}}</span>       
+                           <td> {{('X')}}</td>       
                             @else
-                           <span class="badge bg-success" style="font-size: 12px"> Điểm Final : {{$subject->final_2st}}</span>       
+                           <td> {{$subject->final_2st}}</td>       
                             @endif
                       @endif
-                    </td>
+                    
                   @endif
                
             @endforeach

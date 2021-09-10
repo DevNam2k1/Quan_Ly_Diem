@@ -16,7 +16,11 @@ class MajorController extends Controller
         return view('admin.add_major');
     }
     public function save_major(Request $request){
-
+        $validated = $request->validate([
+            'major_id' => 'required|max:6|min:0',
+            'major_name' => 'required|max:20'
+        ]
+        );
         $data = array();
         $data['major_id'] = $request->major_id;
         $data['major_name'] = $request->major_name;
@@ -38,7 +42,11 @@ class MajorController extends Controller
         return view('admin.edit_major')->with('major_list',$major_list);
     }
     public function update_major(Request $request, $major_id){
-
+        $validated = $request->validate([
+            'major_id' => 'required|max:6|min:0',
+            'major_name' => 'required|max:20'
+        ]
+        );
         $data = array();
         $data['major_id'] = $request->major_id;
         $data['major_name'] = $request->major_name;

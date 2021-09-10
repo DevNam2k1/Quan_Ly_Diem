@@ -29,11 +29,27 @@
       <div class="card-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Mã Ngành Học</label>
-          <input type="text" class="form-control" value="{{$major->major_id}}" name="major_id" id="exampleInputEmail1" placeholder="Mã Ngành Học">
+          <input type="text" class="form-control @if($errors->has('major_id'))is-invalid @endif" value="{{$major->major_id}}" name="major_id" id="exampleInputEmail1" placeholder="Mã Ngành Học"
+          @if($errors->has('major_id'))     
+          aria-invalid="true"
+          @endif
+          >
+          @if($errors->has('major_id'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('major_id')}}
+          </span> 
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Tên Ngành Học</label>
-          <input type="text" class="form-control" value="{{$major->major_name}}" name="major_name" id="exampleInputPassword1" placeholder="Tên Ngành Học">
+          <input type="text" class="form-control @if($errors->has('major_name'))is-invalid @endif" value="{{$major->major_name}}" name="major_name" id="exampleInputPassword1" placeholder="Tên Ngành Học"
+          @if($errors->has('major_name'))     
+          aria-invalid="true"
+          @endif
+          >
+          @if($errors->has('major_name'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('major_name')}}
+          </span> 
         </div>
       <!-- /.card-body -->
       <div class="card-footer">

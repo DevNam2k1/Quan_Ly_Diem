@@ -28,4 +28,7 @@ class AverageController extends Controller
         $avg_student = Collection::make([$sum1,$sum2])->avg();;
         //$student->avg('skill_1st','skill_2st','final_1st','final_2st')
     }
+    public function layout_validate(){
+        return view('layout_validate');
+    }
 }

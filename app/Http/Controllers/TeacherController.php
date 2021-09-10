@@ -16,7 +16,12 @@ class TeacherController extends Controller
         return view('admin.add_lecturers');
     }
     public function save_lecturers(Request $request){
-
+        $validated = $request->validate([
+            'lecturers_id' => 'required|max:6|min:0',
+            'lecturers_name' => 'required|max:20',
+            'gender' => 'required'
+        ]
+        );
         $data = array();
         $data['lecturers_id'] = $request->lecturers_id;
         $data['lecturers_name'] = $request->lecturers_name;
@@ -41,7 +46,12 @@ class TeacherController extends Controller
         return view('admin.edit_lecturers')->with('lecturers',$lecturers);
     }
     public function update_lecturers(Request $request, $lecturers_id){
-
+        $validated = $request->validate([
+            'lecturers_id' => 'required|max:6|min:0',
+            'lecturers_name' => 'required|max:20',
+            'gender' => 'required'
+        ]
+        );
         $data = array();
         $data['lecturers_id'] = $request->lecturers_id;
         $data['lecturers_name'] = $request->lecturers_name;

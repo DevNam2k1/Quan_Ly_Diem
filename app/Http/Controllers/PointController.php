@@ -22,6 +22,7 @@ class PointController extends Controller
 
         $class_id = $request->class_id;
         $subject_id = $request->subject_id;
+        
         $class_list = DB::table('tbl_class')
         ->join('tbl_student','tbl_student.class_id','=','tbl_class.class_id')
         ->get();

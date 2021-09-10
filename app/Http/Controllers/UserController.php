@@ -9,6 +9,7 @@ use App\Models\Roles;
 use App\Models\Admin;
 use Auth;
 use Session;
+use DB;
 class UserController extends Controller
 {
     /**
@@ -16,6 +17,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function my_point(){
+        $student_id = Auth::user()->student_id;
+        $subject_list = DB::table('tbl_subject')->get();
+        $score_list = DB::table('tbl_point')->where("student_id",$student_id)->get();
+        return view('my_point')->with('subject_list',$subject_list)->with('score_list',$score_list);
+    }
     public function index()
     {
         

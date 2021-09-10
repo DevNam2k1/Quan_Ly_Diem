@@ -40,9 +40,160 @@ class AdminController extends Controller
     }
     public function dashboard(){
         $this->AuthLogin();
-        return view('admin.dashboard');
+        $student_list = DB::table('tbl_student')->get();
+        $class_list = DB::table('tbl_class')->get();
+        return view('admin.dashboard')->with('student_list',$student_list)->with('class_list',$class_list);
     }
-     //select address
+    // form điểm sinh viên
+    public function select_student_name(Request $request){
+        $data = $request->all();
+    	if($data['action']){
+    		$output = '';
+    		if($data['action']=="student_name"){
+    			$select_point = DB::table('tbl_point')->where('student_id',$data['ma_id'])->get();
+                $subject_list = DB::table('tbl_subject')->get();
+                $output.='<thead>
+                <tr>
+                <th>Môn Học</th>
+                <th>Điểm Skill</th>
+                <th>Điểm Final</th>
+                </tr>
+                </thead>';
+                $output.='<tbody>';
+                foreach($subject_list as $subject){
+                    $output.='<tr>';
+                    $output.='<td>
+                    '.$subject->subject_name.'
+                       </td>
+                    ';
+                    $output.='<td>';
+                    foreach($select_point as $point){
+                        if($point->subject_id == $subject->subject_id){
+                            if($point->skill_1st == null){
+                                $output.= "X";
+                               }
+                               elseif($point->skill_1st < 5){
+                                $output.= $point->skill_2st;
+                               }else{
+                                $output.= $point->skill_1st;
+                               }
+                        }
+                       
+                        
+                    }
+                    $output.='</td>';
+                    $output.='<td>';
+                    foreach($select_point as $point){
+                        if($point->subject_id == $subject->subject_id){
+                            if($point->final_1st == null){
+                                $output.= "X";
+                               }elseif($point->final_1st < 5){
+                                $output.= $point->final_2st;
+                               }
+                               else{
+                                $output.= $point->final_1st;
+                               } 
+                        }
+                        
+                        
+                    }
+                    $output.='</td>';
+                    $output.='<tr>';
+                }
+                $output.='</tr></tbody>';
+
+    		}
+    		echo $output;
+    	}
+    }
+    //seclect class
+    public function select_class_name(Request $request){
+    	$data = $request->all();
+    	if($data['action']){
+    		$output = '';
+    		if($data['action']=="class_name"){
+    			$select_subject = DB::table('tbl_subject')->get();
+                   Session::put('class_id', $data['ma_id']);
+    				$output.='<option>---Chọn môn học---</option>';
+    			foreach($select_subject as $key => $subject){
+    				$output.='<option type="text" value="'.$subject->subject_id.'">'.$subject->subject_name.'</option>';
+    			}
+
+    		}else{
+
+    			$StudentOfClass = DB::table('tbl_student')->where('class_id',Session::get('class_id'))->get();
+                $PointOfSubject = DB::table('tbl_point')->where('subject_id',$data['ma_id'])->get();
+                foreach($PointOfSubject as $subject){
+                    $name = $subject->subject_id;
+                }
+               
+                $output.='<thead>
+                <tr>
+                <th>Tên Sinh Viên</th>
+                <th>Lớp</th>
+                <th>Môn Học</th>
+                <th>Điểm Skill</th>
+                <th>Điểm Final</th>
+                </tr>
+                </thead>';
+                $output.='<tbody>';
+                foreach($StudentOfClass as $student){
+                    $output.='<tr>';
+                    $output.='<td>
+                    '.$student->lastname.' '.$student->firstname.'
+                       </td>
+                    ';
+                    $output.='<td>
+                    '.Session::get('class_id').'
+                       </td>
+                    ';
+                    $output.='<td>
+                    '.$name.'
+                       </td>
+                    ';
+                    $output.='<td>';
+                    foreach($PointOfSubject as $point){
+                        if($point->student_id == $student->student_id){
+                            if($point->skill_1st == null){
+                                $output.= "X";
+                               }
+                               elseif($point->skill_1st < 5){
+                                $output.= $point->skill_2st;
+                               }else{
+                                $output.= $point->skill_1st;
+                               }
+                        }
+                        
+                    }
+                    $output.='</td>';
+
+                    $output.='<td>';
+                    foreach($PointOfSubject as $point){
+                        if($point->student_id == $student->student_id){
+                           if($point->final_1st == null){
+                            $output.= "X";
+                           }elseif($point->final_1st < 5){
+                            $output.= $point->final_2st;
+                           }
+                           else{
+                            $output.= $point->final_1st;
+                           }
+                        }
+                        
+                    }
+                    $output.='</td>';
+                    $output.='<tr>';
+                }
+                $output.='</tr>
+                
+                </tbody>';
+                
+    		}
+    		echo $output;
+    	}
+    	
+    }
+    //select address
      public function select_delivery(Request $request){
     	$data = $request->all();
     	if($data['action']){
@@ -165,5 +316,12 @@ class AdminController extends Controller
 
     public function manager(){
         return view('admin.users.user_list');
+    }
+    public function register_lecturers(){
+        return view('admin.register.add_lecturers');
+    }
+    public function register_student(){
+        $student_list = DB::table('tbl_student')->get();
+        return view('admin.register.add_student')->with('student_list',$student_list);
     }
 }

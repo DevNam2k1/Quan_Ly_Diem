@@ -12,7 +12,7 @@ class Admin extends Authenticatable
     use HasFactory;
     public $timestamps = false; //set time to false
     protected $fillable = [
-    	'admin_email', 'admin_password', 'admin_name','admin_experience','admin_skill'
+    	'admin_email', 'admin_password', 'admin_name','admin_experience','admin_skill','student_id'
     ];
     protected $primaryKey = 'admin_id';
  	protected $table = 'tbl_admin';

@@ -15,17 +15,23 @@ use Illuminate\Support\Facades\Route;
 
 //Test Average
 Route::get('/avg-point','AverageController@average_point');
+Route::get('/validate','AverageController@layout_validate');
 //Admin
 Route::get('/','AdminController@login');
-Route::get('/login','AdminController@login');
+Route::get('/login-student','AdminController@login');
 Route::get('/dashboard', 'AdminController@dashboard');
 Route::get('/calendar', 'AdminController@calendar');
 Route::get('/profile', 'AdminController@profile');
+Route::get('/register-student', 'AdminController@register_student');
+Route::get('/register-lecturers', 'AdminController@register_lecturers');
+Route::post('/select-student-name','AdminController@select_student_name');
+Route::post('/select-class-name','AdminController@select_class_name');
 
 Route::post('/update-profile/{admin_id}', 'AdminController@update_profile');
 Route::post('/change-password/{admin_id}', 'AdminController@change_password');
 Route::post('/select-delivery','AdminController@select_delivery');
 //User
+Route::get('/my-point','UserController@my_point');
 Route::get('users',
 		[
 			'uses'=>'UserController@index',
@@ -116,5 +122,9 @@ Route::get('/login-authentication','AuthController@login_authentication');
 Route::get('/logout-authentication','AuthController@logout_authentication');
 
 Route::post('/register-authencation','AuthController@register_authencation');
+Route::post('/register-student-id','AuthController@register_student_id');
 Route::post('/login','AuthController@login');
+Route::post('/login-student','AuthController@login_student');
+Route::post('/select-student-id','AuthController@select_student_id');
+
 

@@ -38,7 +38,9 @@
             <th>Ngày Sinh</th>
             <th>Quê Quán</th>
             <th>Lớp</th>
+            @hasrole('admin','author')
             <th></th>
+            @endhasrole
           </tr>
         </thead>
         <tbody>
@@ -52,9 +54,10 @@
             @else
                 <td>Nữ</td>
             @endif
-            <td>{{$student->dob}}</td>
+            <td>{{\Carbon\Carbon::parse($student->dob)->format('d-m-Y')}}</td>
             <td>{{$student->address}}</td>
             <td>{{$student->class_name}}-{{$student->course_id}}</td>
+            @hasrole('admin','author')
             <td>
 
                 <a href="{{URL::to('/edit-student/'.$student->student_id)}}" class="active styling-edit " ui-toggle-class="" style="margin-left: 5px; font-size:20px; ">
@@ -65,6 +68,7 @@
                   <i class="fa fa-times text-danger "></i></a>
                 </a>
               </td>
+              @endhasrole
           </tr>   
           @endforeach
 

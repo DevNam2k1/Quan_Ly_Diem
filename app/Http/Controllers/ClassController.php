@@ -20,7 +20,14 @@ class ClassController extends Controller
         return view('admin.add_class')->with('lecturers_list',$lecturers_list)->with('major_list',$major_list)->with('course_list',$course_list);
     }
     public function save_class(Request $request){
-  
+      $validated = $request->validate([
+        'class_id' => 'required|max:6|min:0',
+        'class_name' => 'required|max:20',
+        'student_qty' => 'required|integer|min:0|size:100',
+        'start_time' => 'required|date|strtotime',
+        'end_time' => 'required|date|strtotime'
+    ]
+    );
         $data = array();
         $data['class_id'] = $request->class_id;
         $data['major_id'] = $request->major_id;
@@ -57,7 +64,14 @@ class ClassController extends Controller
       return view('admin_layout')->with('admin.edit_class',$manager_class);
     }
     public function update_class(Request $request,$class_id){
- 
+      $validated = $request->validate([
+        'class_id' => 'required|max:6|min:0',
+        'class_name' => 'required|max:20',
+        'student_qty' => 'required|integer|min:0|size:100',
+        'start_time' => 'required|date|strtotime',
+        'end_time' => 'required|date|strtotime'
+    ]
+    );
       $data = array();
       $data['class_id'] = $request->class_id;
       $data['major_id'] = $request->major_id;

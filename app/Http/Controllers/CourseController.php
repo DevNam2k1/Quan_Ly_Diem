@@ -16,6 +16,11 @@ class CourseController extends Controller
         return view('admin.add_course');
     }
     public function save_course(Request $request){
+        $validated = $request->validate([
+            'course_id' => 'required|max:6|min:0',
+            'course_name' => 'required|max:20'
+        ]
+        );
         $data = array();
         $data['course_id'] = $request->course_id;
         $data['course_name'] = $request->course_name;
@@ -34,6 +39,11 @@ class CourseController extends Controller
         return view('admin.edit_course')->with('edit_course',$edit_course);
     }
     public function update_course(Request $request,$course_id){
+        $validated = $request->validate([
+            'course_id' => 'required|max:6|min:0',
+            'course_name' => 'required|max:20'
+        ]
+        );
         $data = array();
         $data['course_id'] = $request->course_id;
         $data['course_name'] = $request->course_name;
