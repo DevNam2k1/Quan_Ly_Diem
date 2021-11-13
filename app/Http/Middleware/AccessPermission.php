@@ -2,7 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
+
+use Auth;
 use Closure;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -16,10 +17,7 @@ class AccessPermission
      * @param  \Closure  $next
      * @return mixed
      */
-    protected $admin;
-    public function __construct(Admin $admin){
-        $this->admin = $admin;
-    }
+
   
     public function handle($request, Closure $next)
     {
@@ -28,12 +26,16 @@ class AccessPermission
         $actions =  Route::getCurrentRoute()->getAction();
 
         $roles = isset($actions['roles']) ? $actions['roles'] : null;
-            
-        if($this->admin->hasRole($roles) || !$roles){
-                return $next($request);
-            }else{
-              return abort(401);   
-            }
+        if(Auth::user()){
+          if(Auth::user()->hasAnyRoles($roles)){
+            return $next($request);
+        }else{
+          return abort(401);   
         }
-        
+       } else{
+        return abort(401);  
+       }
+    
+   }
+
 }

@@ -12,26 +12,30 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Test Average
 Route::get('/avg-point','AverageController@average_point');
 Route::get('/validate','AverageController@layout_validate');
 //Admin
+Route::group(['middleware' => 'roles', 'roles'=>['user']], function () {
+	Route::get('/my-point','UserController@my_point');
+});
 Route::get('/','AdminController@login');
 Route::get('/login-student','AdminController@login');
-Route::get('/dashboard', 'AdminController@dashboard');
+
+
+Route::group(['middleware' => 'roles', 'roles'=>['admin','author','user']], function () {
 Route::get('/calendar', 'AdminController@calendar');
 Route::get('/profile', 'AdminController@profile');
-Route::get('/register-student', 'AdminController@register_student');
-Route::get('/register-lecturers', 'AdminController@register_lecturers');
-Route::post('/select-student-name','AdminController@select_student_name');
-Route::post('/select-class-name','AdminController@select_class_name');
-
+Route::get('/logout-authentication','AuthController@logout_authentication');
 Route::post('/update-profile/{admin_id}', 'AdminController@update_profile');
 Route::post('/change-password/{admin_id}', 'AdminController@change_password');
 Route::post('/select-delivery','AdminController@select_delivery');
+
+Route::get('/student-list','StudentController@student_list');
+Route::get('/score-list','PointController@score_list');
+Route::get('/class-point-list','PointController@class_point_list');
 //User
-Route::get('/my-point','UserController@my_point');
+});
+Route::group(['middleware' => 'roles', 'roles'=>['admin','author']], function () {
 Route::get('users',
 		[
 			'uses'=>'UserController@index',
@@ -44,6 +48,7 @@ Route::get('delete-users-roles/{admin_id}','UserController@delete_users_roles');
 
 Route::post('store-users','UserController@store_users');
 Route::post('assign-roles','UserController@assign_roles');
+});
 //Login and logout admin
 Route::get('/logout-admin', 'AdminController@logout_admin');
 Route::post('/login-admin', 'AdminController@login_admin');
@@ -54,24 +59,27 @@ Route::get('/update-new-password', 'MailController@update_new_password');
 Route::post('/recover-password', 'MailController@recover_password');
 Route::post('/reset-password', 'MailController@reset_password');
 //Quản lý điểm
+Route::group(['middleware' => 'roles', 'roles'=>['admin','author']], function () {
 Route::get('/add-point','PointController@add_point');
-Route::get('/score-list','PointController@score_list');
+
 Route::get('/edit-score/{student_id}/{subject_id}','PointController@edit_score');
 Route::get('/delete-score/{student_id}/{subject_id}','PointController@delete_point');
-Route::get('/class-point-list','PointController@class_point_list');
+;
 
 Route::post('/search','PointController@search');
 Route::post('/save-point','PointController@save_point');
 Route::post('/update-point/{student_id}/{subject_id}','PointController@update_point');
 //Quản lý Sinh viên
 Route::get('/add-student','StudentController@add_student');
-Route::get('/student-list','StudentController@student_list');
+
 Route::get('/edit-student/{student_id}','StudentController@edit_student');
 Route::get('/delete-student/{student_id}','StudentController@delete_student');
 
 Route::post('/save-student','StudentController@save_student');
 Route::post('/update-student/{student_id}','StudentController@update_student');
+});
 //Quản lý Giảng Viên
+Route::group(['middleware' => 'roles', 'roles'=>['admin','author']], function () {
 Route::get('/add-lecturers','TeacherController@add_lecturers');
 Route::get('/lecturers-list','TeacherController@lecturers_list');
 Route::get('/edit-lecturers/{lecturers_id}','TeacherController@edit_lecturers');
@@ -115,16 +123,25 @@ Route::get('/delete-course/{course_id}','CourseController@delete_course');
 
 Route::post('/save-course','CourseController@save_course');
 Route::post('/update-course/{course_id}','CourseController@update_course');
-
+});
 //Authentication roles
+Route::group(['middleware' => 'roles', 'roles'=>['admin','author']], function () {
 Route::get('/register', 'AuthController@register');
-Route::get('/login-authentication','AuthController@login_authentication');
-Route::get('/logout-authentication','AuthController@logout_authentication');
+
+
 
 Route::post('/register-authencation','AuthController@register_authencation');
 Route::post('/register-student-id','AuthController@register_student_id');
-Route::post('/login','AuthController@login');
-Route::post('/login-student','AuthController@login_student');
+
 Route::post('/select-student-id','AuthController@select_student_id');
 
+Route::get('/dashboard', 'AdminController@dashboard');
+Route::get('/register-student', 'AdminController@register_student');
+Route::get('/register-lecturers', 'AdminController@register_lecturers');
+Route::post('/select-student-name','AdminController@select_student_name');
+Route::post('/select-class-name','AdminController@select_class_name');
+});
 
+Route::post('/login','AuthController@login');
+Route::post('/login-student','AuthController@login_student');
+Route::get('/login-authentication','AuthController@login_authentication');

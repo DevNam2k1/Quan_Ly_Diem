@@ -40,6 +40,7 @@
             <th width='50'>Điểm Final</th>
             <th width='50'>Điểm Thi Lại Skill</th>
             <th width='50'>Điểm Thi Lại Final</th>
+            <th>Kết Quả</th>
             @hasrole('admin','author')
             <th  width='100'></th>
             @endhasrole
@@ -76,6 +77,14 @@
               <td>{{$score->final_2st}}</td>
             @else
             <td><span class="badge bg-danger">-</span></td> 
+            @endif
+
+            @if ($score->skill_1st >= 5 || $score->skill_1st == null)
+              @if ($score->final_1st >= 5 || $score->final_1st == null )
+                   <td><span class="badge bg-danger">Đạt</span></td> 
+              @endif
+            @else
+                   <td><span class="badge bg-danger">Thi Lại</span></td>
             @endif
             @hasrole('admin','author')
             <td>
