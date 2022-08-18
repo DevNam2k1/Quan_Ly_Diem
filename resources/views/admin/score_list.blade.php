@@ -40,7 +40,8 @@
             <th width='50'>Điểm Final</th>
             <th width='50'>Điểm Thi Lại Skill</th>
             <th width='50'>Điểm Thi Lại Final</th>
-            <th>Kết Quả</th>
+            <th>Kết Quả Lần 1</th>
+            <th>Kết Quả Lần 2</th>       
             @hasrole('admin','author')
             <th  width='100'></th>
             @endhasrole
@@ -78,15 +79,127 @@
             @else
             <td><span class="badge bg-danger">-</span></td> 
             @endif
+            
+            
+                
+            
+            @if (empty($score->skill_1st) == true && empty($score->final_1st) == true )
 
-            @if ($score->skill_1st >= 5 || $score->skill_1st == null)
-              @if ($score->final_1st >= 5 || $score->final_1st == null )
-                   <td><span class="badge bg-danger">Đạt</span></td> 
-              @endif
+            @if ($score->skill_1st >= 5 || $score->skill_1st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_1st >= 5 || $score->final_1st == null )
+                 <td><span class="badge bg-success">Đạt</span></td> 
             @else
-                   <td><span class="badge bg-danger">Thi Lại</span></td>
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
             @endif
-            @hasrole('admin','author')
+            <!--Điểm dưới 5-->
+            @else
+
+            {{-- Thông báo sau khi thi lại --}}
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            @endif
+
+            @if (empty($score->skill_1st) == true && empty($score->final_1st) == false )
+
+            @if ($score->skill_1st >= 5 || $score->skill_1st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_1st >= 5 || $score->final_1st == null )
+                 <td><span class="badge bg-success">Đạt</span></td> 
+            @else
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            <!--Điểm dưới 5-->
+            @else
+
+            {{-- Thông báo sau khi thi lại --}}
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            @endif
+
+            @if (empty($score->skill_1st) == false && empty($score->final_1st) == true )
+
+            @if ($score->skill_1st >= 5 || $score->skill_1st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_1st >= 5 || $score->final_1st == null )
+                 <td><span class="badge bg-success">Đạt</span></td> 
+            @else
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            <!--Điểm dưới 5-->
+            @else
+
+            {{-- Thông báo sau khi thi lại --}}
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            @endif
+            @if (empty($score->skill_1st) == false && empty($score->final_1st) == false )
+
+            @if ($score->skill_1st >= 5 || $score->skill_1st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_1st >= 5 || $score->final_1st == null )
+                 <td><span class="badge bg-success">Đạt</span></td> 
+            @else
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            <!--Điểm dưới 5-->
+            @else
+
+            {{-- Thông báo sau khi thi lại --}}
+                 <td><span class="badge bg-danger">Thi Lại</span></td>
+            @endif
+            @endif
+            
+            <td>
+            @if (empty($score->skill_2st) == false && empty($score->final_2st) == false )
+            @if ($score->skill_2st >= 5 || $score->skill_2st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_2st >= 5 || $score->final_2st == null )
+                 <span class="badge bg-success">Đạt</span>
+            @else
+                 <span class="badge bg-danger">Học Lại</span>
+            @endif
+            <!--Điểm dưới 5-->
+            @else
+
+                 <span class="badge bg-danger">Học Lại</span>
+            @endif
+            @endif
+         
+
+                        
+            @if (empty($score->skill_2st) == false && empty($score->final_2st) == true )
+            @if ($score->skill_2st >= 5 || $score->skill_2st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_2st >= 5 || $score->final_2st == null )
+                 <span class="badge bg-success">Đạt</span>
+            @else
+                 <span class="badge bg-danger">Học Lại</span>
+            @endif
+            <!--Điểm dưới 5-->
+            @else
+
+                 <span class="badge bg-danger">Học Lại</span>
+            @endif
+            @endif
+
+                        
+            @if (empty($score->skill_2st) == true && empty($score->final_2st) == false )
+            @if ($score->skill_2st >= 5 || $score->skill_2st == null )
+            <!--Điểm trên 5-->
+            @if ($score->final_2st >= 5 || $score->final_2st == null )
+                 <span class="badge bg-success">Đạt</span>
+            @else
+                 <span class="badge bg-danger">Học Lại</span>
+            @endif
+            <!--Điểm dưới 5-->
+            @else
+
+                 <span class="badge bg-danger">Học Lại</span>
+            @endif
+            @endif
+          </td>
+            @hasrole(['admin','author'])
             <td>
               <a href="{{URL::to('/edit-score/'.$score->student_id.'/'.$score->subject_id)}}" class="active styling-edit " ui-toggle-class="" style="margin-left: 5px; font-size:20px; ">
                 <i class="far fa-edit text-success" ></i>

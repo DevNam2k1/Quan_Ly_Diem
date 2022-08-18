@@ -20,7 +20,7 @@ class AuthController extends Controller
 
     public function logout_authentication(){
         Auth::logout();
-        return redirect('/login-authentication')->with('message','Đăng xuất authentication thành công');
+        return redirect('/login-authentication')->with('message','Đăng xuất thành công');
     }
     public function login(Request $request){
         $validated = $request->validate([

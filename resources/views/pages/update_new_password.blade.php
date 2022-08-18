@@ -32,20 +32,38 @@
           <input type="hidden" name="admin_email" value="{{$email}}">
           <input type="hidden" name="token_admin" value="{{$token}}">
         <div class="input-group mb-3">
-          <input type="password" name="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control @if($errors->has('password'))is-invalid @endif" placeholder="Mật khẩu"          
+           @if($errors->has('password'))     
+          aria-invalid="true"
+          @endif>
+
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          @if($errors->has('password'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('password')}}
+          </span> 
+          @endif
         </div>
         <div class="input-group mb-3">
-          <input type="password" name="confirm_password" class="form-control" placeholder="Confirm Password">
+          <input type="password" name="confirm_password" class="form-control @if($errors->has('password'))is-invalid @endif" placeholder="Nhập lại mật khẩu"            
+          @if($errors->has('confirm_password'))     
+          aria-invalid="true"
+          @endif>
+          
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
             </div>
           </div>
+          @if($errors->has('confirm_password'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('confirm_password')}}
+          </span> 
+          @endif
         </div>
         <div class="row">
           <div class="col-12">

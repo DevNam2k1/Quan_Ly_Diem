@@ -27,15 +27,39 @@
       <div class="card-body">
         <div class="form-group">
           <label for="exampleInputEmail1">Mã Sinh Viên</label>
-          <input type="text" name="student_id" value="{{$student->student_id}}" class="form-control" id="exampleInputEmail1" placeholder="Mã Sinh Viên">
+          <input type="text" name="student_id" value="{{$student->student_id}}" class="form-control @if($errors->has('student_id'))is-invalid @endif" id="exampleInputEmail1" placeholder="Mã Sinh Viên"
+          @if($errors->has('student_id'))     
+          aria-invalid="true"
+          @endif>
+          @if($errors->has('student_id'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('student_id')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Họ Đệm</label>
-          <input type="text" name="lastname" value="{{$student->lastname}}" class="form-control" id="exampleInputPassword1" placeholder="Họ Đệm">
+          <input type="text" name="lastname" value="{{$student->lastname}}" class="form-control @if($errors->has('lastname'))is-invalid @endif" id="exampleInputPassword1" placeholder="Họ Đệm"
+          @if($errors->has('lastname'))     
+          aria-invalid="true"
+          @endif>
+          @if($errors->has('lastname'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('lastname')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">Tên</label>
-          <input type="text" name="firstname" value="{{$student->firstname}}" class="form-control" id="exampleInputPassword1" placeholder="Tên">
+          <input type="text" name="firstname" value="{{$student->firstname}}" class="form-control @if($errors->has('firstname'))is-invalid @endif" id="exampleInputPassword1" placeholder="Tên"
+          @if($errors->has('firstname'))     
+          aria-invalid="true"
+          @endif>
+          @if($errors->has('firstname'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('firstname')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Giới Tính</label>
@@ -55,11 +79,27 @@
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Ngày Sinh</label>
-            <input type="date" class="form-control" name="dob" value="{{$student->dob}}"  id="exampleInputPassword1" placeholder="Ngày Sinh">
+            <input type="date" class="form-control @if($errors->has('dob'))is-invalid @endif" name="dob" value="{{$student->dob}}"  id="exampleInputPassword1" placeholder="Ngày Sinh"
+            @if($errors->has('dob'))     
+          aria-invalid="true"
+          @endif>
+          @if($errors->has('dob'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('dob')}}
+          </span> 
+          @endif
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Quê Quán</label>
-            <input type="text" name="address" value="{{$student->address}}" class="form-control" id="exampleInputPassword1" placeholder="Địa chỉ">
+            <input type="text" name="address" value="{{$student->address}}" class="form-control @if($errors->has('address'))is-invalid @endif" id="exampleInputPassword1" placeholder="Địa chỉ"
+            @if($errors->has('address'))     
+          aria-invalid="true"
+          @endif>
+          @if($errors->has('address'))
+          <span  class="error invalid-feedback" >
+              {{$errors->first('address')}}
+          </span> 
+          @endif
         </div> 
         <div class="form-group">
             <label for="exampleInputPassword1">Mã Lớp</label>
@@ -77,7 +117,9 @@
       <!-- /.card-body -->
 
       <div class="card-footer">
-        <button type="submit" class="btn btn-primary" onClick="return confirm('Bạn có chắc muốn cập nhật ?')" name="update_student">Cập Nhật</button>
+        <button type="submit" class="btn btn-primary"  @if (empty($errors) == true)
+        onClick="return confirm('Bạn có chắc muốn cập nhật?')"
+        @endif name="update_student">Cập Nhật</button>
       </div>
     </form>
     @endforeach

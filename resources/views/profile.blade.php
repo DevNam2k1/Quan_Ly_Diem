@@ -187,7 +187,7 @@
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Họ và Tên</label>
                         <div class="col-sm-10">
-                          <input type="text" name="admin_name" value="{{Auth::user()->admin_name}}" class="form-control" id="inputName" placeholder="Name">
+                          <input type="text" name="admin_name" value="{{Auth::user()->admin_name}}" class="form-control " id="inputName" placeholder="Name" disabled>
                         </div>
                       </div>
                     <div class="form-group row">
@@ -201,6 +201,11 @@
                         <span class="input-group-text">Upload</span>
                       </div>
                     </div>
+                    @if($errors->has('image'))
+                    <span  class="error invalid-feedback" >
+                        {{$errors->first('image')}}
+                    </span> 
+                    @endif
                   </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
@@ -230,19 +235,40 @@
                                             <option value="">--Chọn xã phường--</option>   
                                     </select>
                           <br>
-                          <input type="text" name="address" class="form-control" id="inputName2" placeholder="Address">
+                          <input type="text" name="address" class="form-control @if($errors->has('lecturers_id'))is-invalid @endif" id="inputName2" placeholder="Address"
+                          @if($errors->has('address'))     
+                          aria-invalid="true"
+                         @endif>
+                         @if($errors->has('address'))
+                         <span  class="error invalid-feedback" >
+                             {{$errors->first('address')}}
+                         </span> 
+                         @endif
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputExperience" class="col-sm-2 col-form-label">Học Vấn</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control"  name="admin_experience" id="inputExperience" placeholder="Experience">{{Auth::user()->admin_experience}}</textarea>
+                          <textarea class="form-control @if($errors->has('admin_experience'))is-invalid @endif"  name="admin_experience" id="inputExperience" placeholder="Experience">{{Auth::user()->admin_experience}}</textarea>
+                          @if($errors->has('admin_experience'))
+                          <span  class="error invalid-feedback" >
+                              {{$errors->first('admin_experience')}}
+                          </span> 
+                          @endif
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputSkills" class="col-sm-2 col-form-label">Kĩ Năng</label>
                         <div class="col-sm-10">
-                          <input type="text" name="admin_skill" value="{{Auth::user()->admin_skill}}" class="form-control" id="inputSkills" placeholder="Skills">
+                          <input type="text" name="admin_skill" value="{{Auth::user()->admin_skill}}" class="form-control @if($errors->has('admin_experience'))is-invalid @endif" id="inputSkills" placeholder="Skills"
+                          @if($errors->has('admin_skill'))     
+                          aria-invalid="true"
+                         @endif>
+                          @if($errors->has('admin_skill'))
+                          <span  class="error invalid-feedback" >
+                              {{$errors->first('admin_skill')}}
+                          </span> 
+                          @endif
                         </div>
                       </div>
                       <div class="form-group row">
@@ -256,7 +282,9 @@
                       </div>
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button type="submit" @if (empty($errors) == true)
+                          onClick="return alert('Cập nhật thông tin thành công ^^')"
+                          @endif class="btn btn-danger">Submit</button>
                         </div>
                       </div>
                     </form>

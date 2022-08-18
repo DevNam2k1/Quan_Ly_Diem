@@ -60,10 +60,10 @@
                 <a href="{{URL::to('/edit-class/'.$class->class_id)}}" class="active styling-edit " ui-toggle-class="" style="margin-left: 5px; font-size:20px; ">
                   <i class="far fa-edit text-success" ></i>
                 </a>
-                &nbsp;&nbsp;&nbsp;
+                {{-- &nbsp;&nbsp;&nbsp;
                 <a onClick="return confirm('Bạn có chắc muốn xóa lớp học này không?')" href="{{URL::to('/delete-class/'.$class->class_id)}}" style="margin-left: 5px; font-size:20px;" class="active styling-edit" ui-toggle-class="">
                   <i class="fa fa-times text-danger "></i></a>
-                </a>
+                </a> --}}
               </td>
           </tr>
           @endforeach

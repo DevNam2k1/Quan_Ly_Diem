@@ -66,6 +66,11 @@ class MailController extends Controller
 
     public function reset_password(Request $reruest){
         $data = $reruest->all();
+        $validated = $reruest->validate([
+            'password' => 'required|min:8|max:20',
+            'confirm_password' => 'required|min:8|max:20'
+        ]
+        );
         $token_random = Str::random();
         $admin = Admin::where('admin_email','=',$data['admin_email'])->where('token_admin','=',$data['token_admin'])->get();
         if($data['password'] == $data['confirm_password']){
@@ -81,6 +86,7 @@ class MailController extends Controller
             if($count_admin == 0){
                 return redirect('forgot-password')->with('error','Link đã hết thời hạn , vui lòng thử lại');
             }else{
+
                 $token_random = Str::random();
                 $admin = Admin::find($admin_id);
                 $admin->token_admin = $token_random;

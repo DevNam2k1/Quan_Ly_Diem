@@ -40,6 +40,13 @@ class AdminController extends Controller
     }
     public function dashboard(){
         $this->AuthLogin();
+        $student_count = DB::table('tbl_student')->get()->count();
+        Session::put('student_count',$student_count);
+        $teacher_count = DB::table('tbl_lecturers')->get()->count();
+        Session::put('teacher_count',$teacher_count);
+        $admin_count = DB::table('tbl_admin')->get()->count();
+        Session::put('admin_count',$admin_count);
+        
         $student_list = DB::table('tbl_student')->get();
         $class_list = DB::table('tbl_class')->get();
         return view('admin.dashboard')->with('student_list',$student_list)->with('class_list',$class_list);
@@ -237,6 +244,15 @@ class AdminController extends Controller
     }
     public function update_profile(Request $request,$admin_id){
          $data = $request->all();
+         $validated = $request->validate([
+            'admin_name' => 'required',
+            'admin_experience' => 'required',
+            'image' => 'required',
+            'admin_skill' => 'required',
+            'address' => 'required'
+        ]
+        );
+
          $wards = DB::table('tbl_xaphuongthitran')->where('xaid',$data['wards'])->get();
          foreach($wards as $key => $value){
              $ward = $value->name;

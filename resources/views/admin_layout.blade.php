@@ -161,8 +161,12 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           @hasrole(['admin','author'])
-          <li class="nav-item menu-open">
-            <a href="{{URL::to('/dashboard')}}" class="nav-link active">
+          <li class="nav-item @if (Request::path() == "dashboard")
+          menu-is-opening menu-open
+          @endif ">
+            <a href="{{URL::to('/dashboard')}}" class="nav-link @if (Request::path() == "dashboard")
+            active
+            @endif ">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Bản Điều Khiển
@@ -172,7 +176,7 @@
           @endhasrole
           @hasrole('user')
           <li class="nav-item menu-open">
-            <a href="{{URL::to('/my-point')}}" class="nav-link active">
+            <a href="{{URL::to('/my-point')}}" class="nav-link {{ Request::path() == 'my-point'   ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Bảng Điểm Cá Nhân
@@ -181,30 +185,30 @@
           </li>
           @endhasrole
           {{-- Quản Lý Điểm --}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'score-list' || Request::path() == 'class-point-list' || Request::path() == 'add-point' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'score-list' || Request::path() == 'class-point-list' || Request::path() == 'add-point' ? 'active' : '' }}">
               <i class="fas fa-marker nav-icon"></i>
               <p>
-                Quản Lý Điểm
+                Quản Lý Điểm 
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('/score-list')}}" class="nav-link">
+                <a href="{{URL::to('/score-list')}}" class="nav-link {{ Request::path() == 'score-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/class-point-list')}}" class="nav-link">
+                <a href="{{URL::to('/class-point-list')}}" class="nav-link {{ Request::path() == 'class-point-list'   ? 'active' : '' }}">
                   <i class="fas fa-graduation-cap nav-icon"></i>
                   <p>Bảng Điểm Theo Lớp</p>
                 </a>
               </li>
               @hasrole(['admin','author'])
               <li class="nav-item">
-                <a href="{{URL::to('/add-point')}}" class="nav-link">
+                <a href="{{URL::to('/add-point')}}" class="nav-link {{ Request::path() == 'add-point'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p> Nhập Điểm </p>
                 </a>
@@ -213,8 +217,8 @@
             </ul>
           </li>
           {{--Quản lý sinh viên--}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'student-list'  || Request::path() == 'add-student' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'student-list'  || Request::path() == 'add-student' ? 'active' : '' }}">
               <i class="fas fa-user-graduate nav-icon"></i>
               <p>
                  Sinh Viên
@@ -223,14 +227,14 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('/student-list')}}" class="nav-link">
+                <a href="{{URL::to('/student-list')}}" class="nav-link {{ Request::path() == 'student-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               @hasrole(['admin','author'])
               <li class="nav-item">
-                <a href="{{URL::to('/add-student')}}" class="nav-link">
+                <a href="{{URL::to('/add-student')}}" class="nav-link {{ Request::path() == 'add-student'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Sinh Viên</p>
                 </a>
@@ -241,8 +245,8 @@
           
           @hasrole(['admin','author'])
           {{--Quản lý Giảng Viên--}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'lecturers-list'  || Request::path() == 'add-lecturers' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'lecturers-list'  || Request::path() == 'add-lecturers' ? 'active' : '' }}">
               <i class="fas fa-chalkboard-teacher nav-icon"></i>
               <p>
                 Giảng Viên
@@ -251,13 +255,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('lecturers-list')}}" class="nav-link">
+                <a href="{{URL::to('lecturers-list')}}" class="nav-link {{ Request::path() == 'lecturers-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/add-lecturers')}}" class="nav-link">
+                <a href="{{URL::to('/add-lecturers')}}" class="nav-link {{ Request::path() == 'add-lecturers'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Giảng Viên</p>
                 </a>
@@ -267,8 +271,8 @@
           @endhasrole
           @hasrole(['admin','author'])
           {{--Quản Lý Môn Học--}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'subject-list'  || Request::path() == 'add-subject' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'subject-list'  || Request::path() == 'add-subject' ? 'active' : '' }}">
               <i class="fas fa-book nav-icon"></i>
               <p>
                 Môn Học
@@ -277,13 +281,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('subject-list')}}" class="nav-link">
+                <a href="{{URL::to('subject-list')}}" class="nav-link {{ Request::path() == 'subject-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/add-subject')}}" class="nav-link">
+                <a href="{{URL::to('/add-subject')}}" class="nav-link {{ Request::path() == 'add-subject'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Môn Học</p>
                 </a>
@@ -293,8 +297,8 @@
           @endhasrole
           @hasrole(['admin','author'])
           {{--Quản Lý Lớp Học--}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'class-list'  || Request::path() == 'add-class' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'class-list'  || Request::path() == 'add-class' ? 'active' : '' }}">
               <i class="fas fa-school nav-icon"></i>
               <p>
                 Lớp Học
@@ -303,13 +307,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('class-list')}}" class="nav-link">
+                <a href="{{URL::to('class-list')}}" class="nav-link {{ Request::path() == 'class-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/add-class')}}" class="nav-link">
+                <a href="{{URL::to('/add-class')}}" class="nav-link {{ Request::path() == 'add-class'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Lớp Học</p>
                 </a>
@@ -319,8 +323,8 @@
           @endhasrole
           {{--Quản Lý Ngành Học--}}
           @hasrole(['admin','author'])
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'major-list'  || Request::path() == 'add-major' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'major-list'  || Request::path() == 'add-major' ? 'active' : '' }}">
               <i class="fas fa-laptop nav-icon"></i>
               <p>
                 Ngành Học
@@ -329,13 +333,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('major-list')}}" class="nav-link">
+                <a href="{{URL::to('major-list')}}" class="nav-link {{ Request::path() == 'major-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/add-major')}}" class="nav-link">
+                <a href="{{URL::to('/add-major')}}" class="nav-link {{ Request::path() == 'add-major'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Ngành Học</p>
                 </a>
@@ -345,8 +349,8 @@
           @endhasrole
           @hasrole(['admin','author'])
           {{--Quản Lý Khóa--}}
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'course-list'  || Request::path() == 'add-course' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'course-list'  || Request::path() == 'add-course' ? 'active' : '' }}">
               <i class="fas fa-id-card nav-icon"></i>
               <p>
                 Khóa
@@ -355,13 +359,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('course-list')}}" class="nav-link">
+                <a href="{{URL::to('course-list')}}" class="nav-link {{ Request::path() == 'course-list'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p> Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/add-course')}}" class="nav-link">
+                <a href="{{URL::to('/add-course')}}" class="nav-link {{ Request::path() == 'add-course'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm Khóa</p>
                 </a>
@@ -371,7 +375,7 @@
           @endhasrole
           {{--Lịch Học--}}
           <li class="nav-item">
-            <a href="{{URL::to('/calendar')}}" class="nav-link">
+            <a href="{{URL::to('/calendar')}}" class="nav-link {{ Request::path() == 'calendar'   ? 'active' : '' }}">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Lịch Học
@@ -380,8 +384,8 @@
             </a>
           </li>
           @hasrole('admin')
-          <li class="nav-item">
-            <a href="#" class="nav-link">
+          <li class="nav-item {{ Request::path() == 'users'  || Request::path() == 'register-lecturers' || Request::path() == 'register-student' ? 'menu-is-opening menu-open' : '' }}">
+            <a href="#" class="nav-link {{ Request::path() == 'users'  || Request::path() == 'register-lecturers' || Request::path() == 'register-student' ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Quản Lý User
@@ -390,19 +394,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{URL::to('/users')}}" class="nav-link">
+                <a href="{{URL::to('/users')}}" class="nav-link {{ Request::path() == 'users'   ? 'active' : '' }}">
                   <i class="fas fa-list nav-icon"></i>
                   <p>Danh Sách</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/register-lecturers')}}" class="nav-link">
+                <a href="{{URL::to('/register-lecturers')}}" class="nav-link {{ Request::path() == 'register-lecturers'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm TK Giáo Vụ</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{URL::to('/register-student')}}" class="nav-link">
+                <a href="{{URL::to('/register-student')}}" class="nav-link {{ Request::path() == 'register-student'   ? 'active' : '' }}">
                   <i class="fas fa-plus-square nav-icon"></i>
                   <p>Thêm TK Sinh Viên</p>
                 </a>

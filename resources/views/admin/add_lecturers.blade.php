@@ -65,7 +65,9 @@
         </div>
       <!-- /.card-body -->
       <div class="card-footer">
-        <button type="submit" onClick="return alert('Bạn thêm giảng viên thành công ^^')" name="save-lecturers" class="btn btn-primary">Thêm</button>
+        <button type="submit" @if (empty($errors) == true)
+        onClick="return alert('Bạn thêm giảng viên thành công ^^')"
+        @endif  name="save-lecturers" class="btn btn-primary">Thêm</button>
       </div>
     </form>
   </div>

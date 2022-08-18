@@ -53,10 +53,10 @@
                 <a href="{{URL::to('/edit-lecturers/'.$teacher->lecturers_id)}}" class="active styling-edit " ui-toggle-class="" style="margin-left: 5px; font-size:20px; ">
                   <i class="far fa-edit text-success" ></i>
                 </a>
-                &nbsp;&nbsp;&nbsp;
+                {{-- &nbsp;&nbsp;&nbsp;
                 <a onClick="return confirm('Bạn có chắc muốn xóa giảng viên này không?')" href="{{URL::to('/delete-lecturers/'.$teacher->lecturers_id)}}" style="margin-left: 5px; font-size:20px;" class="active styling-edit" ui-toggle-class="">
                   <i class="fa fa-times text-danger "></i></a>
-                </a>
+                </a> --}}
               </td>
           </tr>
           @endforeach

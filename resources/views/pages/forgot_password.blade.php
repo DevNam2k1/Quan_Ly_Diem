@@ -54,9 +54,7 @@
       <p class="mt-3 mb-1">
         <a href="{{URL::to('/login')}}">Đăng Nhập</a>
       </p>
-      <p class="mb-0">
-        <a href="{{URL::to('/register')}}" class="text-center">Đăng Kí Tài Khoản</a>
-      </p>
+     
     </div>
     <!-- /.login-card-body -->
   </div>

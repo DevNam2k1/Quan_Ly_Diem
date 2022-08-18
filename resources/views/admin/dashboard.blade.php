@@ -20,7 +20,7 @@
     <!-- small box -->
     <div class="small-box bg-info">
       <div class="inner">
-        <h3>4</h3>
+        <h3>{{Session::get('student_count')}}</h3>
 
         <p>Sinh Viên</p>
       </div>
@@ -35,7 +35,7 @@
     <!-- small box -->
     <div class="small-box bg-success">
       <div class="inner">
-        <h3>3</h3>
+        <h3>{{Session::get('teacher_count')}}</h3>
 
         <p>Giảng Viên</p>
       </div>
@@ -50,9 +50,9 @@
     <!-- small box -->
     <div class="small-box bg-warning">
       <div class="inner">
-        <h3>5</h3>
+        <h3>{{Session::get('admin_count')}}</h3>
 
-        <p>Tài Khoản Đăng Kí</p>
+        <p>Tài Khoản</p>
       </div>
       <div class="icon">
         <i class="ion ion-person-add"></i>

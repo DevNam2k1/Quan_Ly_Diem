@@ -19,7 +19,16 @@ class StudentController extends Controller
     }
 
     public function save_student(Request $request){
-
+        $validated = $request->validate([
+            'student_id' => 'required|min:1|max:10',
+            'lastname' => 'required|min:2|max:30',
+            'firstname' => 'required|min:1|max:10',
+            'gender' => 'required',
+            'dob' => 'required',
+            'address' => 'required',
+            'class_id' => 'required'
+        ]
+        );
         $data = array();
         $data['student_id'] = $request->student_id;
         $data['lastname'] = $request->lastname;
@@ -49,7 +58,16 @@ class StudentController extends Controller
         return view('admin.edit_student')->with('class_list',$class_list)->with('edit_student',$edit_student);
     }
     public function update_student(Request $request,$student_id){
-
+        $validated = $request->validate([
+            'student_id' => 'required|min:1|max:10',
+            'lastname' => 'required|min:2|max:10',
+            'firstname' => 'required|min:1|max:10',
+            'gender' => 'required',
+            'dob' => 'required',
+            'address' => 'required',
+            'class_id' => 'required'
+        ]
+        );
         $data = array();
         $data['student_id'] = $request->student_id;
         $data['lastname'] = $request->lastname;

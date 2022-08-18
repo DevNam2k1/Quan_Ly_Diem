@@ -22,7 +22,7 @@
     <!-- /.card-header -->
     <!-- form start -->
     @foreach ($edit_score as $key => $score)
-<form action="{{URL::to('/update-point/'.$score->student_id.'/'.$score->subject_id)}}" method="POST">
+<form action="{{URL::to('/update-point/'.$score->student_id.'/'.Session::get('subject_id'))}}" method="POST">
   {{ csrf_field()}}
  
    

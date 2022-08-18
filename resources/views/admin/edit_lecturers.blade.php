@@ -79,7 +79,9 @@
         </div>
       <!-- /.card-body -->
       <div class="card-footer">
-        <button type="submit" onClick="return confirm('Bạn có chắc muốn cập nhật ?')" name="update-lecturers" class="btn btn-primary">Cập Nhật</button>
+        <button type="submit"  @if (empty($errors) == true)
+        onClick="return confirm('Bạn có chắc muốn cập nhật ?')"
+        @endif name="update-lecturers" class="btn btn-primary">Cập Nhật</button>
       </div>
     </form>
     @endforeach
